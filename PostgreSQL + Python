@@ -1,0 +1,24 @@
+import psycopg2
+
+# estabelece conexão do banco de dados no PgAdmin e cria o cursor
+conn = psycopg2.connect(database="pedido",
+                           host="localhost", 
+                           user="postgres", 
+                           password="081278", 
+                           port="5432")
+cur = conn.cursor()
+
+# realiza consultas simples de SELECT 
+cur.execute("SELECT * FROM cliente ORDER BY idcliente")
+cur.execute("SELECT * FROM transportadora")
+
+# reúne os resultados
+resultado = cur.fetchall()
+
+# exibição das consultas
+for res in resultado:
+    print(res)
+
+# encerra a conexão (importante!)
+conn.close()
+print('\n Conexão encerrada!')
